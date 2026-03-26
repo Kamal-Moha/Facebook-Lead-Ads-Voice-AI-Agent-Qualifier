@@ -9,6 +9,7 @@ on:
       - main
     paths:
       - 'livekit-voice-agent/**'
+      - '.github/workflows/livekit-agent-deploy-automated.yml'
       - '!livekit-voice-agent/livekit.toml'
       - '!livekit-voice-agent/README.md'
       - '!livekit-voice-agent/**/*.md'
@@ -26,7 +27,7 @@ jobs:
 
       - name: Check livekit.toml exists
         id: check_config
-        uses: thebinaryfelix/check-file-existence-action@v1
+        uses: thebinaryfelix/check-file-existence-action@v2.0.0
         with:
           files: 'livekit-voice-agent/livekit.toml'
 
