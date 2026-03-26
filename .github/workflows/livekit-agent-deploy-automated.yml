@@ -27,7 +27,7 @@ jobs:
 
       - name: Check livekit.toml exists
         id: check_config
-        uses: thebinaryfelix/check-file-existence-action@v2.0.0
+        uses: thebinaryfelix/check-file-existence-action@v1.0.1
         with:
           files: 'livekit-voice-agent/livekit.toml'
 
