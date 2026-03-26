@@ -135,7 +135,7 @@ async def my_agent(ctx: agents.JobContext):
     session = AgentSession(
         llm=aws.realtime.RealtimeModel(voice="tiffany"),
         mcp_servers=[
-            mcp.MCPServerHTTP("https://abbe-102-209-109-143.ngrok-free.app/mcp")
+            mcp.MCPServerHTTP("https://9a04-102-203-209-141.ngrok-free.app/mcp")
         ],
     )
 
