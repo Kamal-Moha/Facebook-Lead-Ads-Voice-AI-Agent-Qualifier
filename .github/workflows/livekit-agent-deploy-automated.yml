@@ -1,4 +1,4 @@
-name: Deploy test-agent on changes
+name: Deploy livekit-voice-agent on changes
 
 env:
   LIVEKIT_AGENT_DIRECTORY: 'livekit-voice-agent'

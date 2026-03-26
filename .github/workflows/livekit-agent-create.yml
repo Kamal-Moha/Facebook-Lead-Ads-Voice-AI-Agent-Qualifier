@@ -1,4 +1,4 @@
-name: Create test-agent
+name: Create livekit-voice-agent
 on:
   workflow_dispatch:
 
