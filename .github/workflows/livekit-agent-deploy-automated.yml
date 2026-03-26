@@ -8,17 +8,17 @@ on:
     branches:
       - main
     paths:
-      - 'livkeit-voice-agent/**'
-      - '!livkeit-voice-agent/livekit.toml'
-      - '!livkeit-voice-agent/README.md'
-      - '!livkeit-voice-agent/**/*.md'
+      - 'livekit-voice-agent/**'
+      - '!livekit-voice-agent/livekit.toml'
+      - '!livekit-voice-agent/README.md'
+      - '!livekit-voice-agent/**/*.md'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: livkeit-voice-agent
+    environment: livekit-voice-agent
     concurrency:
-      group: ${{ github.workflow }}-livkeit-voice-agent
+      group: ${{ github.workflow }}-livekit-voice-agent
       cancel-in-progress: true
 
     steps:
