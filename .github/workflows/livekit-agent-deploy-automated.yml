@@ -1,0 +1,43 @@
+name: Deploy test-agent on changes
+
+env:
+  LIVEKIT_AGENT_DIRECTORY: 'livekit-voice-agent'
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'livkeit-voice-agent/**'
+      - '!livkeit-voice-agent/livekit.toml'
+      - '!livkeit-voice-agent/README.md'
+      - '!livkeit-voice-agent/**/*.md'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: livkeit-voice-agent
+    concurrency:
+      group: ${{ github.workflow }}-livkeit-voice-agent
+      cancel-in-progress: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check livekit.toml exists
+        id: check_config
+        uses: thebinaryfelix/check-file-existence-action@v1
+        with:
+          files: 'livekit-voice-agent/livekit.toml'
+
+      - name: Deploy LiveKit Cloud Agent
+        if: steps.check_config.outputs.exists == 'true'
+        uses: livekit/deploy-action@v2.12.1
+        env:
+          LIVEKIT_URL: ${{ secrets.LIVEKIT_URL }}
+          LIVEKIT_API_KEY: ${{ secrets.LIVEKIT_API_KEY }}
+          LIVEKIT_API_SECRET: ${{ secrets.LIVEKIT_API_SECRET }}
+          SECRET_LIST: ${{ secrets.SECRET_LIST }}
+        with:
+          OPERATION: deploy
+          WORKING_DIRECTORY: ${{ env.LIVEKIT_AGENT_DIRECTORY }}

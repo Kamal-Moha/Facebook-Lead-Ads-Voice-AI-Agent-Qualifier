@@ -1,0 +1,52 @@
+name: Create test-agent
+on:
+  workflow_dispatch:
+
+env:
+  LIVEKIT_AGENT_DIRECTORY: 'livekit-voice-agent'
+
+jobs:
+  create-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create LiveKit Cloud Agent
+        uses: livekit/deploy-action@v2
+        env:
+          LIVEKIT_URL: ${{ secrets.LIVEKIT_URL }}
+          LIVEKIT_API_KEY: ${{ secrets.LIVEKIT_API_KEY }}
+          LIVEKIT_API_SECRET: ${{ secrets.LIVEKIT_API_SECRET }}
+          SECRET_LIST: ${{ secrets.SECRET_LIST }}
+        with:
+          OPERATION: create
+          WORKING_DIRECTORY: ${{ env.LIVEKIT_AGENT_DIRECTORY }}
+
+      - name: Create Pull Request # create a pull request to add the newly created livekit.toml
+        uses: peter-evans/create-pull-request@v7
+        with:
+          add-paths: |
+            ${{ env.LIVEKIT_AGENT_DIRECTORY }}/livekit.toml
+          token: ${{ secrets.GH_TOKEN }}
+          branch: cloud-agent-${{ github.run_id }}
+          title: "Add LiveKit agent config"
+          commit-message: "Add LiveKit agent config"
+          body: |
+            This PR adds the LiveKit agent configuration
+
+          base: main
+          delete-branch: true
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: cloud-agent-${{ github.run_id }}
+      - name: Status Check # block until the agent is in the 'Running' state
+        uses: livekit/deploy-action@v2.12.1
+        env:
+          LIVEKIT_URL: ${{ secrets.LIVEKIT_URL }}
+          LIVEKIT_API_KEY: ${{ secrets.LIVEKIT_API_KEY }}
+          LIVEKIT_API_SECRET: ${{ secrets.LIVEKIT_API_SECRET }}
+        with:
+          OPERATION: status-retry
+          WORKING_DIRECTORY: ${{ env.LIVEKIT_AGENT_DIRECTORY }}
+          TIMEOUT: 5m

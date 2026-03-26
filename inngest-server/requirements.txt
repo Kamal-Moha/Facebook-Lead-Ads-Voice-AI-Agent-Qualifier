@@ -1,0 +1,7 @@
+inngest
+fastapi[standard]
+livekit-agents
+pydantic-ai
+email-validator
+pydantic-settings
+facebook_business

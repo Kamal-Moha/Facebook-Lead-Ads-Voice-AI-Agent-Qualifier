@@ -1,0 +1,20 @@
+[project]
+name = "inngest-server"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "email-validator>=2.3.0",
+    "facebook-business>=25.0.0",
+    "fastapi[standard]>=0.135.2",
+    "inngest>=0.5.18",
+    "livekit-agents>=1.5.1",
+    "pydantic-ai>=1.71.0",
+    "pydantic-settings>=2.13.1",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.7",
+]
