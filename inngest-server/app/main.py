@@ -233,6 +233,12 @@ async def getting_lead_data(lead_gen_id: str):
     }
     return modified_lead_dict
 
+signing_key = os.getenv("INNGEST_SIGNING_KEY")
+if signing_key:
+    logging.info(f"Inngest key found. Length: {len(signing_key)}")
+    print(f"Inngest key found. Length: {len(signing_key)}")
+else:
+    logging.error("Inngest signing key is MISSING at runtime")
 
 # Create an Inngest client
 inngest_client = inngest.Inngest(
