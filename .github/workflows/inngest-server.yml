@@ -1,0 +1,87 @@
+name: Build and Deploy inngest server to Cloud Run
+
+on:
+  push:
+    paths:
+      - 'inngest-server/**'
+      - '.github/workflows/inngest-server.yml'
+      - '!inngest-server/README.md'
+
+env:
+  ARTIFACT_REPO: 'inngest-server'
+  REGION: 'us-east1'
+  SERVICE: 'inngest-server-fastapi-meta-lead-ads'
+  PORT: 8000
+  
+jobs:
+  deploy:
+    runs-on: 'ubuntu-latest'
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+
+      # Configure Workload Identity Federation and generate an access token.
+      #
+      # See https://github.com/google-github-actions/auth for more options,
+      # including authenticating via a JSON credentials file.
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          token_format: access_token
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      # BEGIN - Docker auth and build
+      #
+      # If you already have a container image, you can omit these steps.
+      - name: 'Docker Auth'
+        uses: 'docker/login-action@v3'
+        with:
+          registry: '${{ env.REGION }}-docker.pkg.dev'
+          username: 'oauth2accesstoken'
+          password: '${{ steps.auth.outputs.access_token }}'
+
+      - name: 'Build and Push Container'
+        run: |-
+          DOCKER_TAG="${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.ARTIFACT_REPO }}/cicd-app-img"
+          echo "${DOCKER_TAG}"
+          cd inngest-server
+          docker build --tag "${DOCKER_TAG}" .
+          docker push "${DOCKER_TAG}"
+      - name: 'Deploy to Cloud Run'
+        id: deploy
+
+        # END - Docker auth and build
+
+        uses: 'google-github-actions/deploy-cloudrun@v2'
+        with:
+          service: '${{ env.SERVICE }}'
+          region: '${{ env.REGION }}'
+          image: '${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.ARTIFACT_REPO }}/cicd-app-img'
+          secrets: |
+            INNGEST_EVENT_KEY=INNGEST_EVENT_KEY:latest
+            INNGEST_SIGNING_KEY=INNGEST_SIGNING_KEY:latest
+            LIVEKIT_API_KEY=LIVEKIT_API_KEY:latest
+            LIVEKIT_API_SECRET=LIVEKIT_API_SECRET:latest
+            LIVEKIT_URL=LIVEKIT_URL:latest
+            SIP_OUTBOUND_TRUNK_ID=SIP_OUTBOUND_TRUNK_ID:latest
+            GITHUB_API_KEY=GITHUB_API_KEY:latest
+            APPS_SCRIPT_WEB_APP=APPS_SCRIPT_WEB_APP:latest
+            FACEBOOK_PAGE_ACCESS_TOKEN=FACEBOOK_PAGE_ACCESS_TOKEN:latest
+            FACEBOOK_APP_SECRET=FACEBOOK_APP_SECRET:latest
+            FACEBOOK_APP_ID=FACEBOOK_APP_ID:latest
+            WEBHOOK_VERIFY_TOKEN=WEBHOOK_VERIFY_TOKEN:latest
+          flags: 
+            '--allow-unauthenticated --port=${{env.PORT}} --service-account=${{ secrets.GCP_SERVICE_ACCOUNT }}'
+          
+      # If required, use the Cloud Run URL output in later steps
+      - name: 'Show output'
+        run: |2-
+
+          echo ${{ steps.deploy.outputs.url }}
