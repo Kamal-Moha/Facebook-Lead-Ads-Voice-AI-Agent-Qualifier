@@ -28,8 +28,7 @@ call_recording_bucket = "voice-ai-call-recordings-meta-lead-ads"
 # Create an Inngest client
 inngest_client = inngest.Inngest(
     app_id="Lead Qualification - Voice AI Agent",
-    logger=logging.getLogger("uvicorn"),
-    is_production=os.environ.get("ENV") == "production",
+    logger=logging.getLogger("uvicorn")
 )
 
 
