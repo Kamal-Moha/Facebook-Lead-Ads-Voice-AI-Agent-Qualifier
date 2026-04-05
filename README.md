@@ -59,6 +59,16 @@ The Voice AI Agent takes these actions as soon as a Facebook Lead ad form is fil
 5. Categorize the lead (whether lead is high/medium/low)
 6. Save call summary on a CRM (i.e Google Sheets)
 
+## Benefits
+With this Voice AI Agent implemented, business owners & marketers advertising on Facebook;
+1. Will never lose a hot lead again.
+2. No more leads will go to your competition.
+3. No more customer will tell "I didn't fill a form" because you're now able to call them instantly in less than 60 seconds.
+4. Filter out spammy numbers, fake leads and bots.
+5. Will reduce your Customer Per Acquisition (CAC) cost.
+6. Will increase your revenue.
+7. Your sales team will now follow-up to actual humans who are interested. 
+
 ## Tech stack used
 1. Livekit: To build the Voice AI Agent
 2. Inngest: As the Agent Orchestrator
