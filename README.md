@@ -48,6 +48,8 @@ The Voice AI Agent qualifies the lead in real-time, filters out spammy numbers a
 
 ## Architecture
 
+<img width="811" height="361" alt="Architecture" src="https://github.com/user-attachments/assets/e90c1421-854a-4bc7-95c3-c533157002cf" />
+
 
 ## How this Voice AI System works
 
