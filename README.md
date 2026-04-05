@@ -63,6 +63,7 @@ The Voice AI Agent takes these actions as soon as a Facebook Lead ad form is fil
 4. Book an appointment on the business calendar
 5. Categorize the lead (whether lead is high/medium/low)
 6. Save call summary on a CRM (i.e Google Sheets)
+<img width="2160" height="800" alt="FB Lead Ads + Voice AI" src="https://github.com/user-attachments/assets/9ecf029e-00ab-4e08-b6e8-c79f46b9650a" />
 
 ## Benefits
 With this Voice AI Agent implemented, business owners & marketers advertising on Facebook;
