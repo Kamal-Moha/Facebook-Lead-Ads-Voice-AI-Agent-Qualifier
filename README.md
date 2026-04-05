@@ -5,6 +5,8 @@ This Voice AI Agent calls your facebook leads ads in less than 60 seconds, quali
 ## Demo: This Voice AI Agent in Action
 
 
+https://github.com/user-attachments/assets/bea6c8fb-9650-4eb2-8e6d-eda491ee49d5
+
 
 ## Table of contents
 - [Problem Statement](#problem-statement)
@@ -48,6 +50,8 @@ I have created a Voice AI system that's able to;
 The Voice AI Agent qualifies the lead in real-time, filters out spammy numbers and fake leads, books appointments on your calendar, and sends you the legit leads. It then analyzes the call, categorizes the lead and instantly updates your CRM.
 
 ## Architecture
+
+<img width="811" height="361" alt="Architecture" src="https://github.com/user-attachments/assets/e90c1421-854a-4bc7-95c3-c533157002cf" />
 
 
 ## How this Voice AI System works
