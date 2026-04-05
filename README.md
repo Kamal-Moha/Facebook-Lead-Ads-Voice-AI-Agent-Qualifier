@@ -12,6 +12,7 @@ This Voice AI Agent calls your facebook leads ads in less than 60 seconds, quali
 - [Solution](#solution)
 - [Architecture](#architecture)
 - [How this Voice AI System works](#how-this-voice-ai-system-works)
+- [Benefits](#benefits)
 - [Tech stack used](#tech-stack-used)
 - [Resources](#resources)
 
@@ -75,7 +76,7 @@ With this Voice AI Agent implemented, business owners & marketers advertising on
 3. Twilio: Phone carrier
 4. PydanticAI: To summarize the call transcription & provide structured output.
 5. Google Apps Script: To upload call analysis/summary to Google Sheets
-6. Deployed on GCP (Cloud run) & Livekit Cloud.
+6. Deployed the Voice Agent on Livekit Cloud and the inngest server on GCP Cloud run.
 7. Used Github Actions to automate deployments
 
 ## Resources
