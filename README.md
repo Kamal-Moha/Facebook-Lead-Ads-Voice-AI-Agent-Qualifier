@@ -76,13 +76,13 @@ With this Voice AI Agent implemented, business owners & marketers advertising on
 7. Your sales team will now follow-up to actual humans who are interested. 
 
 ## Tech stack used
-1. Livekit: To build the Voice AI Agent
-2. Inngest: As the Agent Orchestrator
-3. Twilio: Phone carrier
-4. PydanticAI: To summarize the call transcription & provide structured output.
-5. Google Apps Script: To upload call analysis/summary to Google Sheets
-6. Deployed the Voice Agent on Livekit Cloud and the inngest server on GCP Cloud run.
-7. Used Github Actions to automate deployments
+1. **Livekit**: To build the Voice AI Agent
+2. **Inngest (FastAPI)**: The Agent Orchestrator & takes actions behind the scenes.
+3. **Twilio**: Phone carrier
+4. **PydanticAI**: To summarize the call transcription & provide structured output.
+5. **Google Apps Script**: To upload call analysis/summary to Google Sheets
+6. **Cloud Platforms**: Deployed the Voice Agent on Livekit Cloud and the inngest server on GCP Cloud run.
+7. **Github Actions**: To automate deployments
 
 ## Resources
 Watch the full video of this Voice AI Agent in use.
